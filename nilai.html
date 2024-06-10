@@ -72,10 +72,6 @@
             </script>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <!-- <li><a class="dropdown-item" href="#">New project...</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
-            <!-- <li><hr class="dropdown-divider" /></li> -->
             <li style="margin-bottom: 0; cursor: pointer"><a class="dropdown-item" onclick="logout()">Sign out</a></li>
           </ul>
         </div>
@@ -88,14 +84,18 @@
             <h1 class="h1-hp">Cetak Nilai</h1>
             <hr />
             <script>
-              for (let i = 0; i < questions.length; i++) {
-                let no = i;
-                document.write(`
+              if (localStorage.getItem("answers") === null) {
+                alert("Anda belum mengerjakan quiz");
+                window.location.href = "quiz.html";
+              } else {
+                for (let i = 0; i < questions.length; i++) {
+                  let no = i;
+                  document.write(`
                   <div class="card mb-3">
                     <div class="card-body">
                       <h5 class="card-title">Soal ${no + 1}</h5>
                       <p class="card-text">${questions[i].question}</p>
-                      
+
                       <div class="form-check mb-2 d-flex flex-row">
                           <input class="form-check" type="radio" name="question-${i}" value="a" disabled
                           />
@@ -120,27 +120,30 @@
                   </div>
                   `);
 
-                if (JSON.parse(localStorage.getItem("answers"))[i].answer == questions[i].answer) {
-                  document.write(` <p class="card-text jawaban-anda alert alert-success">Jawaban yang benar: ${questions[i].answer}</p>`);
-                } else {
-                  document.write(`<p class="card-text jawaban-anda alert alert-danger">Jawaban yang benar: ${questions[i].answer}</p>`);
-                }
+                  if (JSON.parse(localStorage.getItem("answers"))[i].answer == questions[i].answer) {
+                    document.write(` <p class="card-text jawaban-anda alert alert-success">Jawaban yang benar: ${questions[i].answer.toUpperCase()}</p>`);
+                  } else {
+                    document.write(`<p class="card-text jawaban-anda alert alert-danger">Jawaban yang benar: ${questions[i].answer.toUpperCase()}</p>`);
+                  }
 
-                if (JSON.parse(localStorage.getItem("answers"))[i].answer == "a") {
-                  document.querySelector(`input[name=question-${i}][value=a]`).setAttribute("checked", "checked");
-                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "b") {
-                  document.querySelector(`input[name=question-${i}][value=b]`).setAttribute("checked", "checked");
-                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "c") {
-                  document.querySelector(`input[name=question-${i}][value=c]`).setAttribute("checked", "checked");
-                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "d") {
-                  document.querySelector(`input[name=question-${i}][value=d]`).setAttribute("checked", "checked");
+                  if (JSON.parse(localStorage.getItem("answers"))[i].answer == "a") {
+                    document.querySelector(`input[name=question-${i}][value=a]`).setAttribute("checked", "checked");
+                  } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "b") {
+                    document.querySelector(`input[name=question-${i}][value=b]`).setAttribute("checked", "checked");
+                  } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "c") {
+                    document.querySelector(`input[name=question-${i}][value=c]`).setAttribute("checked", "checked");
+                  } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "d") {
+                    document.querySelector(`input[name=question-${i}][value=d]`).setAttribute("checked", "checked");
+                  }
                 }
               }
-            </script>
-            <!-- buat tombol download dan preview dari quiz yang sudah dijawab user -->
-            <div class="d-flex flex-row flex-shrink-0">
+
+              document.write(`
+              <div class="d-flex flex-row flex-shrink-0">
               <a href="export-nilai.html?export=pdf" class="btn btn-danger me-2" onclick="downloadNilai()"><i class="bi bi-filetype-pdf me-2"></i>Download PDf</a>
             </div>
+              `);
+            </script>
           </div>
         </div>
       </div>
