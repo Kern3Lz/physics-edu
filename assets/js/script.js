@@ -48,7 +48,7 @@ function login() {
   for (let i = 0; i < user.length; i++) {
     if (username === user[i].username && pass === user[i].password) {
       localStorage.setItem("username", username);
-      localStorage.setItem("login", user[i].level);
+      localStorage.setItem("login", true);
       alert("Login Berhasil");
       window.location.href = "index.html";
       return;
