@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- title -->
+    <title>Hambatan Arus Listrik | Fisika</title>
+
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="assets/style/style.css" />
+
+    <script src="assets/js/question.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <!-- left and right side -->
+    <div class="d-flex flex-row flex-shrink-0 text-white bg-dark" style="width: 100%; height: 100vh">
+      <!-- sidebar -->
+      <div class="responsive-hp d-flex flex-column flex-shrink-0 pt-3 p-3 text-bg-dark shadow-lg rounded">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mt-1 me-md-auto text-white text-decoration-none">
+          <i class="bi bi-lightning-charge me-2 icon-hp"></i>
+          <span class="d-none d-sm-inline d-md-inline">Hambatan & Arus Listrik</span>
+        </a>
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link text-white">
+              <i class="bi bi-house-door me-2"></i>
+              <span class="d-none d-sm-inline d-md-inline">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="materi.html" class="nav-link text-white">
+              <i class="bi bi-journal-bookmark me-2"></i>
+              <span class="d-none d-sm-inline">Materi</span>
+            </a>
+          </li>
+          <li>
+            <a href="quiz.html" class="nav-link text-white">
+              <i class="bi bi-question-circle me-2"></i>
+              <span class="d-none d-sm-inline">Quiz</span>
+            </a>
+          </li>
+          <li>
+            <a href="nilai.html" class="nav-link active" aria-current="page">
+              <i class="bi bi-file-earmark-check me-2"></i>
+              <span class="d-none d-sm-inline">Nilai</span>
+            </a>
+          </li>
+        </ul>
+        <hr />
+
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <script>
+              if (localStorage.getItem("username") !== null) {
+                document.write('<i class="bi bi-person-circle me-2"></i><strong class="d-none d-sm-inline">' + localStorage.getItem("username") + "</strong>");
+              } else {
+                document.write('<i class="bi bi-person-circle me-2"></i><strong class="d-none d-sm-inline">Guest</strong>');
+              }
+            </script>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <!-- <li><a class="dropdown-item" href="#">New project...</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+            <!-- <li><hr class="dropdown-divider" /></li> -->
+            <li style="margin-bottom: 0; cursor: pointer"><a class="dropdown-item" onclick="logout()">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- content -->
+      <div class="container-fluid overflow-x-hidden overflow-ab-scroll pdf-content">
+        <div class="row px-4 mt-3">
+          <div class="mb-5">
+            <h1 class="h1-hp">Cetak Nilai</h1>
+            <hr />
+            <script>
+              for (let i = 0; i < questions.length; i++) {
+                let no = i;
+                document.write(`
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">Soal ${no + 1}</h5>
+                      <p class="card-text">${questions[i].question}</p>
+                      
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="a" disabled
+                          />
+                          <label class="form-check">${questions[i].a}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="b" disabled
+                          />
+                          <label class="form-check">${questions[i].b}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="c" disabled
+                          />
+                          <label class="form-check">${questions[i].c}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="d" disabled
+                          />
+                          <label class="form-check">${questions[i].d}</label>
+                      </div>
+                      </div>
+                  </div>
+                  `);
+
+                if (JSON.parse(localStorage.getItem("answers"))[i].answer == questions[i].answer) {
+                  document.write(` <p class="card-text jawaban-anda alert alert-success">Jawaban yang benar: ${questions[i].answer}</p>`);
+                } else {
+                  document.write(`<p class="card-text jawaban-anda alert alert-danger">Jawaban yang benar: ${questions[i].answer}</p>`);
+                }
+
+                if (JSON.parse(localStorage.getItem("answers"))[i].answer == "a") {
+                  document.querySelector(`input[name=question-${i}][value=a]`).setAttribute("checked", "checked");
+                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "b") {
+                  document.querySelector(`input[name=question-${i}][value=b]`).setAttribute("checked", "checked");
+                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "c") {
+                  document.querySelector(`input[name=question-${i}][value=c]`).setAttribute("checked", "checked");
+                } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "d") {
+                  document.querySelector(`input[name=question-${i}][value=d]`).setAttribute("checked", "checked");
+                }
+              }
+            </script>
+            <!-- buat tombol download dan preview dari quiz yang sudah dijawab user -->
+            <div class="d-flex flex-row flex-shrink-0">
+              <a href="export-nilai.html?export=pdf" class="btn btn-danger me-2" onclick="downloadNilai()"><i class="bi bi-filetype-pdf me-2"></i>Download PDf</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      if (localStorage.getItem("username") === null) {
+        window.location.href = "login.html";
+      }
+
+      function downloadNilai() {
+        let doc = new jsPDF();
+
+        let pdf_ele = document.write(`
+        <div class="container-fluid overflow-x-hidden overflow-ab-scroll pdf-content">
+        <div class="row px-4 mt-3">
+          <div class="mb-5">
+            <h1 class="h1-hp">Cetak Nilai</h1>
+            <hr />`);
+        for (let i = 0; i < questions.length; i++) {
+          let no = i;
+          document.write(`
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">Soal ${no + 1}</h5>
+                      <p class="card-text">${questions[i].question}</p>
+                      
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="a" disabled
+                          />
+                          <label class="form-check">${questions[i].a}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="b" disabled
+                          />
+                          <label class="form-check">${questions[i].b}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="c" disabled
+                          />
+                          <label class="form-check">${questions[i].c}</label>
+                      </div>
+                      <div class="form-check mb-2 d-flex flex-row">
+                          <input class="form-check" type="radio" name="question-${i}" value="d" disabled
+                          />
+                          <label class="form-check">${questions[i].d}</label>
+                      </div>
+                      </div>
+                  </div>
+                  `);
+
+          if (JSON.parse(localStorage.getItem("answers"))[i].answer == questions[i].answer) {
+            document.write(` <p class="card-text jawaban-anda alert alert-success">Jawaban yang benar: ${questions[i].answer}</p>`);
+          } else {
+            document.write(`<p class="card-text jawaban-anda alert alert-danger">Jawaban yang benar: ${questions[i].answer}</p>`);
+          }
+
+          if (JSON.parse(localStorage.getItem("answers"))[i].answer == "a") {
+            document.querySelector(`input[name=question-${i}][value=a]`).setAttribute("checked", "checked");
+          } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "b") {
+            document.querySelector(`input[name=question-${i}][value=b]`).setAttribute("checked", "checked");
+          } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "c") {
+            document.querySelector(`input[name=question-${i}][value=c]`).setAttribute("checked", "checked");
+          } else if (JSON.parse(localStorage.getItem("answers"))[i].answer == "d") {
+            document.querySelector(`input[name=question-${i}][value=d]`).setAttribute("checked", "checked");
+          }
+        }
+        document.write(`</div></div></div>`);
+
+        html2canvas(pdf_ele).then((canvas) => {
+          let imgData = canvas.toDataURL("image/png");
+          let pdf = new jsPDF("p", "mm", "a4");
+          pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+          pdf.save("nilai.pdf");
+        });
+      }
+    </script>
+    <script src="assets/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
