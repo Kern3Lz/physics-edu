@@ -56,12 +56,6 @@
               <span class="d-none d-sm-inline">Nilai</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="#" class="nav-link text-white">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-              Customers
-            </a>
-          </li> -->
         </ul>
         <hr />
 
@@ -76,10 +70,6 @@
             </script>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <!-- <li><a class="dropdown-item" href="#">New project...</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
-            <!-- <li><hr class="dropdown-divider" /></li> -->
             <li style="margin-bottom: 0; cursor: pointer"><a class="dropdown-item" onclick="logout()">Sign out</a></li>
           </ul>
         </div>
@@ -90,7 +80,6 @@
         <div class="row px-4 mt-3">
           <div class="mb-5">
             <script>
-              // jika localstorage nilai belum ada
               if (localStorage.getItem("nilai") != 0 && localStorage.getItem("nilai") != null) {
                 document.write(`
                         <div>
@@ -115,22 +104,22 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Soal ${i + 1}</h5>
-                                    <p class="card-text">${questions[i].question}</p>
+                                    <p class="card-text p-hp">${questions[i].question}</p>
                                     <div class="form-check mb-2 d-flex flex-row">
                                         <input class="form-check input-${i}" type="radio" name="question-${i}" value="a" />
-                                        <label class="form-check label-${i}">${questions[i].a}</label>
+                                        <label class="form-check label-${i} p-hp">${questions[i].a}</label>
                                     </div>
                                     <div class="form-check mb-2 d-flex flex-row">
                                         <input class="form-check input-${i}" type="radio" name="question-${i}" value="b" />
-                                        <label class="form-check label-${i}">${questions[i].b}</label> 
+                                        <label class="form-check label-${i} p-hp">${questions[i].b}</label> 
                                     </div> 
                                     <div class="form-check mb-2 d-flex flex-row">
                                         <input class="form-check input-${i}" type="radio" name="question-${i}" value="c" />
-                                        <label class="form-check label-${i}">${questions[i].c}</label>
+                                        <label class="form-check label-${i} p-hp">${questions[i].c}</label>
                                     </div>
                                     <div class="form-check mb-2 d-flex flex-row">
                                         <input class="form-check input-${i}" type="radio" name="question-${i}" value="d" />
-                                        <label class="form-check label-${i}">${questions[i].d}</label>
+                                        <label class="form-check label-${i} p-hp">${questions[i].d}</label>
                                     </div>
                                 </div>
                             </div>

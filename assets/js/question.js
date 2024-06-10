@@ -81,8 +81,10 @@ function submit() {
   alert(`Nilai Anda: ${nilai}`);
 
   localStorage.setItem("nilai", nilai);
+  // buat expire value dari localStorage nilai ketika sudah 1 hari
+  let expire = new Date().getTime() + 86400000;
+  localStorage.setItem("expire", expire);
 
-  //   set answers to local storage
   localStorage.setItem("answers", JSON.stringify(answers));
 
   window.location.href = "nilai.html";
