@@ -39,6 +39,10 @@ ul li {
   margin-bottom: 1.2rem;
 }
 
+.status-login {
+  font-size: 0.8rem;
+}
+
 /* Media Query for Handphones */
 
 @media (max-width: 480px) {

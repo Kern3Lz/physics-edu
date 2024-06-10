@@ -1,6 +1,6 @@
 let user = [
-  { username: "ADE BINTANG SEPTIAN", password: "50423036", level: "user" },
   { username: "admin", password: "admin", level: "admin" },
+  { username: "ADE BINTANG SEPTIAN", password: "50423036", level: "user" },
   { username: "AHMAD IRZA FARABY", password: "50423082", level: "user" },
   { username: "ALI MUKODASSAIT", password: "50423122", level: "user" },
   { username: "ANGGA RIZKI NUGRAHA", password: "50423181", level: "user" },
