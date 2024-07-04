@@ -64,5 +64,6 @@ function login() {
 function logout() {
   localStorage.removeItem("username");
   localStorage.removeItem("login");
+  localStorage.removeItem("answers");
   window.location.href = "login.html";
 }
