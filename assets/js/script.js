@@ -65,5 +65,6 @@ function logout() {
   localStorage.removeItem("username");
   localStorage.removeItem("login");
   localStorage.removeItem("answers");
+  localStorage.removeItem("nilai");
   window.location.href = "login.html";
 }
